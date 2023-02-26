@@ -1,6 +1,7 @@
 
 const express = require( 'express' )
 const app = express()
+const fs = require('fs')
 
 
 const brain = require('brain.js')
@@ -12,8 +13,11 @@ const brain = require('brain.js')
 
 
 const net = new brain.NeuralNetwork({
-    hiddenLayers:[3],
+    hiddenLayers:[3 ],
     activation: 'sigmoid',
+    momentum:.4,
+    logPeriod: 500 ,
+    iterations:200000
     
 
 })
@@ -34,13 +38,15 @@ train()
 
 do {
     train()
-   
-console.log( net.run( [1,0] ) )
-} while ( net.run( [1,0] ) < .9999 );
+
+} while ( net.run( [1,0] ) < .99 );
 
 console.log( net.run( [1,0] ) )
 
-
+const result = net.toJSON()
+fs.writeFile('result', JSON.stringify(result), (err) => {
+    console.log("nie zapsiano")
+})
 
 
 app.get( '/', ( req, res) => {
