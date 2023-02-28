@@ -21,7 +21,8 @@ class DataTrening {
         activation: 'sigmoid',
         momentum:.4,
         logPeriod: 500 ,
-        iterations:500
+        iterations:500,
+        inputSize:2
     }
 
     

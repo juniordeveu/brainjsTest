@@ -3,11 +3,14 @@ const express = require( 'express' )
 const app = express()
 const fs = require('fs')
 const DataTrening = require('./public/test')
+const routegame = require('./routes/game')
+
 
 /* brain js */
 const brain = require( 'brain.js' )
 
 const getDataToTrening = new DataTrening
+
 
 /* end */
 /* I creating new net and get data for traininig net  */
@@ -21,10 +24,12 @@ const train = () => {
 
 do {
     train()
-
 } while ( net.run( [1,0] ) < .997 );
 
 console.log("testuje  " , net.run( [1,0] ) )
+
+
+
 
 /* testing  */
 
@@ -48,6 +53,7 @@ fs.writeFile('result', JSON.stringify( result ), ( err ) => {
 })
 /* end */
 
+app.use( routegame )
 app.get( '/', ( req, res ) => {
 
 
@@ -55,6 +61,7 @@ app.get( '/', ( req, res ) => {
     res.end()
 
 } ) 
+
 
 
 
